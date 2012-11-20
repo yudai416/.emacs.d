@@ -86,10 +86,10 @@
 ; C-c C-v でregionをコメントアウト解除
 (global-set-key (kbd "C-c C-v") 'uncomment-region)
 
-; C-, でファイル内探索
+; C-x , でファイル内探索
 (global-set-key (kbd "C-x ,") 'occur)
 
-; C-. で指定行への移動
+; C-x / で指定行への移動
 (global-set-key (kbd "C-x /") 'goto-line)
 
 ; anything
