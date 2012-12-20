@@ -92,6 +92,10 @@
 ; C-x / で指定行への移動
 (global-set-key (kbd "C-x /") 'goto-line)
 
+; C-x : でkill-summary
+(require 'kill-summary)
+(global-set-key (kbd "C-x :") 'kill-summary)
+
 ; anything
 (require 'anything)
 (require 'anything-config)
@@ -173,3 +177,15 @@
       (list "/usr/local/bin/pychecker"  (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
 	       '("\\.py\\'" flymake-pyflakes-init)))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
