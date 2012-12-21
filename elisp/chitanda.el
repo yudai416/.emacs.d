@@ -24,7 +24,7 @@
     (insert ":::: ＞　　　 　 　 　 イ::::::|:::|::::/　i|\n")
     (insert ":::::::| 　 ＞-＜　　 |:::::::|:::|:::/ jl\n")
     (insert "\n")
-    (insert "     わたし、気になります!\n")
+    (insert "     　　　わたし、\n")
     (insert "\n")
     (display-buffer (current-buffer)))) ;; カレントバッファを表示する
 
@@ -52,7 +52,7 @@
     (insert "　||／ 　 ∨ニ∧::::}ﾆ{　　　　　 　 /{::::::::::′ﾆﾆ/ 　 ＼ﾉ\n")
     (insert ". / 　 ヽ.　∨ニ∧:j}=∧- ＿＿＿＿ -/=}:::::::/ﾆﾆ／　　/　‘,\n")
     (insert "\n")
-    (insert "                    わたし、気になります！\n")
+    (insert "                       気になります！\n")
     (insert "\n")
     (display-buffer (current-buffer)))) ;; カレントバッファを表示する
 
