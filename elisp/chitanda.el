@@ -15,7 +15,6 @@
 
 (defun erutaso1 ()
   (interactive)	;; コマンドであると宣言する
-
   (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
   ;;(let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
     (set-buffer buffer) ;; "*erutaso*"バッファをカレントバッファにする
