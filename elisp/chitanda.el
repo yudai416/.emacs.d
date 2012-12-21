@@ -2,11 +2,24 @@
   (interactive)
   (message "私・・・、気になります!!!"))
 
+(defun erutaso0 ()
+  (interactive)	;; コマンドであると宣言する
+  (setq num '(1))
+  (while num
+    (if (eq (car num) 1) (erutaso1)
+      (erutaso2))
+    (if (eq (car num) 1) (setq num '(2))
+      (setq num '(1)))
+    (if (sit-for 1) (setq num num)
+      (setq num nil))))
+
 (defun erutaso1 ()
   (interactive)	;; コマンドであると宣言する
-  (let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
-    ;; (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+
+  (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+  ;;(let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
     (set-buffer buffer) ;; "*erutaso*"バッファをカレントバッファにする
+    (erase-buffer)
     (insert "::::,:/::|:::::|ｉ:::､::::::::::.\n") ;; カレントバッファに文字列を書き込む
     (insert ":::/:/:::|:::::||ﾍ:::::i:::::::::.\n")
     (insert "::/:/:::/|:::::|||::|::|:::::::::.\n")
@@ -30,9 +43,10 @@
 
 (defun erutaso2 ()
   (interactive)	;; コマンドであると宣言する
-  (let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
-    ;; (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+  (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+    ;; (let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
     (set-buffer buffer) ;; "*erutaso*"バッファをカレントバッファにする
+    (erase-buffer)
     (insert ".             ／::::::::::::::::::::::::::::::＼\n")
     (insert "            / :::::::/:::::: i::::::::::':::::::ヽ\n")
     (insert "          ′:'::::::::/ :::::::ﾊ:::::::|:::'::::::::.\n")

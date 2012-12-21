@@ -100,10 +100,13 @@
 (require 'chitanda)
 (global-set-key (kbd "C-x c") 'kininarimasu)
 
-; C-c f でerutaso1
+; C-c 0 でerutaso1
+(global-set-key (kbd "C-c 0") 'erutaso0)
+
+; C-c 1 でerutaso1
 (global-set-key (kbd "C-c 1") 'erutaso1)
 
-; C-c f でerutaso2
+; C-c 2 でerutaso2
 (global-set-key (kbd "C-c 2") 'erutaso2)
 
 ; anything
