@@ -4,7 +4,8 @@
 
 (defun erutaso1 ()
   (interactive)	;; コマンドであると宣言する
-  (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+  (let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
+    ;; (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
     (set-buffer buffer) ;; "*erutaso*"バッファをカレントバッファにする
     (insert "::::,:/::|:::::|ｉ:::､::::::::::.\n") ;; カレントバッファに文字列を書き込む
     (insert ":::/:/:::|:::::||ﾍ:::::i:::::::::.\n")
@@ -29,7 +30,8 @@
 
 (defun erutaso2 ()
   (interactive)	;; コマンドであると宣言する
-  (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
+  (let ((buffer (generate-new-buffer "*erutaso*"))) ;; "*erutaso*"バッファを作成
+    ;; (let ((buffer (get-buffer-create "*erutaso*"))) ;; "*erutaso*"バッファを作成
     (set-buffer buffer) ;; "*erutaso*"バッファをカレントバッファにする
     (insert ".             ／::::::::::::::::::::::::::::::＼\n")
     (insert "            / :::::::/:::::: i::::::::::':::::::ヽ\n")
