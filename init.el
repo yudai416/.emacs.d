@@ -96,6 +96,16 @@
 (require 'kill-summary)
 (global-set-key (kbd "C-x :") 'kill-summary)
 
+; C-x c でkininarimasu
+(require 'chitanda)
+(global-set-key (kbd "C-x c") 'kininarimasu)
+
+; C-c f でerutaso1
+(global-set-key (kbd "C-c 1") 'erutaso1)
+
+; C-c f でerutaso2
+(global-set-key (kbd "C-c 2") 'erutaso2)
+
 ; anything
 (require 'anything)
 (require 'anything-config)
