@@ -1,4 +1,3 @@
-
 ;;; undo-tree.el --- Treat undo history as a tree
 
 
