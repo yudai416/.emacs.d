@@ -2,11 +2,11 @@
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 ;(setq load-path (cons "~/.emacs.d/dict" load-path))
 
-;; オートインストールの設定
-;; (when (require 'auto-install nil t)
-;;   (setq auto-install-directory "~/.emacs.d/elisp/")
-;;   (auto-install-update-emacswiki-package-name t)
-;;   (auto-install-compatibility-setup))
+; オートインストールの設定
+;(when (require 'auto-install nil t)
+;  (setq auto-install-directory "~/.emacs.d/elisp/")
+;  (auto-install-update-emacswiki-package-name t)
+;  (auto-install-compatibility-setup))
 
 ; ターミナルエミュレータのシェルをbashに設定
 (when (require 'multi-term nil t)
@@ -109,11 +109,17 @@
 ; C-c 2 でerutaso2
 (global-set-key (kbd "C-c 2") 'erutaso2)
 
-; anything
+; C-x ; でanything
 (require 'anything)
 (require 'anything-config)
 (require 'anything-match-plugin)
 (global-set-key (kbd "C-x ;") 'anything)
+
+; C-x \ でreplace-regexp
+(global-set-key (kbd "C-x \\") 'replace-regexp)
+
+; C-x C-\ でreplace-string
+(global-set-key (kbd "C-x C-\\") 'replace-string)
 ;; =====================================================
 ;;
 ;; root権限でファイルを開く設定
@@ -173,6 +179,14 @@
 ; D言語
 ; .dを.javaと関連付け
 (setq auto-mode-alist (cons '("\\.d$" . java-mode) 
+			    auto-mode-alist))
+(setq interpreter-mode-alist(append '(("java" . java-mode)) 
+				    interpreter-mode-alist))
+(setq java-deep-indent-paren-style nil)
+
+; processing
+; .pdeを.javaと関連付け
+(setq auto-mode-alist (cons '("\\.pde$" . java-mode) 
 			    auto-mode-alist))
 (setq interpreter-mode-alist(append '(("java" . java-mode)) 
 				    interpreter-mode-alist))
