@@ -120,6 +120,11 @@
 
 ; C-x C-\ でreplace-string
 (global-set-key (kbd "C-x C-\\") 'replace-string)
+
+; C-x p でfix-this-buffer
+(require 'fix-buffer)
+(global-set-key (kbd "C-x p") 'fix-this-buffer)
+
 ;; =====================================================
 ;;
 ;; root権限でファイルを開く設定
