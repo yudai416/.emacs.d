@@ -221,3 +221,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+;;php-mode
+(load-library "php-mode")
+(require 'php-mode)
