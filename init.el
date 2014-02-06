@@ -125,6 +125,10 @@
 (require 'fix-buffer)
 (global-set-key (kbd "C-x p") 'fix-this-buffer)
 
+; w3mのインクルード
+(add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
+(require 'w3m-load)
+
 ;; =====================================================
 ;;
 ;; root権限でファイルを開く設定
