@@ -219,6 +219,17 @@
 (setq auto-mode-alist (cons
                '("\\.d$" . d-mode) auto-mode-alist))
 
+;; ac-dcd
+(require 'ac-dcd)
+(add-hook 'd-mode-hook
+          '(lambda ()
+             (c-set-style "bsd")
+             (setq c-basic-offset 2)
+             (setq c-auto-newline t)
+             (setq indent-tabs-mode nil)
+             (setq tab-width 2)
+             (ac-dcd-setup)))
+
 ; processing
 ; .pdeを.javaと関連付け
 (setq auto-mode-alist (cons '("\\.pde$" . java-mode) 
