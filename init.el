@@ -19,6 +19,22 @@
 (when (require 'undo-tree nil t)
  (global-undo-tree-mode))
 
+;;; package.el
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t) ;; meplaを追加
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t) ;;
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t) ;; elpaを追加
+(package-initialize)
+
+;; auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+;; popwin
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+
 ; 括弧強調
 (show-paren-mode t)
 
@@ -29,7 +45,7 @@
 (column-number-mode t)
 
 ; 行番号表示
-(global-linum-mode)
+(global-linum-mode t)
 ; (setq linum-format "%4d")
 
 ; 常時デバッグ
@@ -42,7 +58,11 @@
 (toggle-scroll-bar nil)
 
 ; メニューバーを消す
-(menu-bar-mode nil)
+(menu-bar-mode 0)
+
+;; ツールバーの設定
+(setq tool-bar-style 'image)
+;; (tool-bar-mode 0)
 
 ; バッテリー残量
 (display-battery-mode t)
@@ -187,11 +207,17 @@
 			  (flymake-mode t))))
 ; D言語
 ; .dを.javaと関連付け
-(setq auto-mode-alist (cons '("\\.d$" . java-mode) 
-			    auto-mode-alist))
-(setq interpreter-mode-alist(append '(("java" . java-mode)) 
-				    interpreter-mode-alist))
-(setq java-deep-indent-paren-style nil)
+;; (setq auto-mode-alist (cons '("\\.d$" . java-mode) 
+;; 			    auto-mode-alist))
+;; (setq interpreter-mode-alist(append '(("java" . java-mode)) 
+;; 				    interpreter-mode-alist))
+;; (setq java-deep-indent-paren-style nil)
+
+;; d-mode
+(require 'd-mode)
+(autoload 'd-mode "d-mode" "Major mode for editing D code." t)
+(setq auto-mode-alist (cons
+               '("\\.d$" . d-mode) auto-mode-alist))
 
 ; processing
 ; .pdeを.javaと関連付け
