@@ -1,0 +1,3 @@
+[submodule "d-mode"]
+	path = d-mode
+	url = git://github.com/kubo39/d-mode
