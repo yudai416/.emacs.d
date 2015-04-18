@@ -214,7 +214,7 @@
 ;; (setq java-deep-indent-paren-style nil)
 
 ;; d-mode
-(require 'd-mode)
+(add-to-list 'load-path "~/.emacs.d/d-mode")
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
 (setq auto-mode-alist (cons
                '("\\.d$" . d-mode) auto-mode-alist))
