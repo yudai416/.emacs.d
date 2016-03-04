@@ -8,10 +8,10 @@
 ;  (auto-install-update-emacswiki-package-name t)
 ;  (auto-install-compatibility-setup))
 
-; ターミナルエミュレータのシェルをbashに設定
-(when (require 'multi-term nil t)
-  (setq multi-term-directory "~/.emacs.d/elisp/")
-  (setq multi-term-program "/bin/bash"))
+;; ; ターミナルエミュレータのシェルをbashに設定
+;; (when (require 'multi-term nil t)
+;;   (setq multi-term-directory "~/.emacs.d/elisp/")
+;;   (setq multi-term-program "/bin/bash"))
 
 ; undo-treeの設定
 ;(when (require 'undo-tree nil t)
@@ -67,8 +67,8 @@
 ; バッテリー残量
 (display-battery-mode t)
 
-; 文字サイズ指定
-(set-face-font 'default "-*-*-*-*-*-*-14-*")
+;; ; 文字サイズ指定
+;; (set-face-font 'default "-*-*-*-*-*-*-14-*")
 
 ; 初期フレームの設定
 ;(setq initial-frame-alist 
