@@ -302,3 +302,9 @@
 ;;; 色の設定
 (set-face-attribute 'web-mode-html-tag-face nil :foreground "#0000FF")
 (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "#CC9922")
+
+;;; yaml-modeの設定
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
