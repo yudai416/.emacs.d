@@ -86,15 +86,15 @@
 ; フルスクリーン
 ;(set-frame-parameter nil 'fullscreen 'fullboth)
 
-; 起動時にバッファを2分割、左側にbashを表示
-(defun split-window-and-run-term()
-  (setq w (selected-window))
-  (setq w2 (split-window w nil t))
-  (select-window w)
-  ; (multi-term)
-  (eshell)
-  (select-window w))
-(add-hook 'after-init-hook (lambda()(split-window-and-run-term)))
+;; ; 起動時にバッファを2分割、左側にbashを表示
+;; (defun split-window-and-run-term()
+;;   (setq w (selected-window))
+;;   (setq w2 (split-window w nil t))
+;;   (select-window w)
+;;   ; (multi-term)
+;;   (eshell)
+;;   (select-window w))
+;; (add-hook 'after-init-hook (lambda()(split-window-and-run-term)))
 
 ; 自動略語補完
 (require 'auto-complete-config)
