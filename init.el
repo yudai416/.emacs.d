@@ -49,7 +49,7 @@
 ; (setq linum-format "%4d")
 
 ; 常時デバッグ
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 ; スタートアップメッセージ非表示
 (setq inhibit-startup-message t)
