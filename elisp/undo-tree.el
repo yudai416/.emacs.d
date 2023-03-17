@@ -3183,7 +3183,9 @@ signaling an error if file is not found."
 	     (not revert-buffer-in-progress-p))
     (undo-tree-load-history nil t)))
 
-
+;; visualizer size
+(defcustom undo-tree-visualizer-ratio (/ 1 4.0)
+  "ratio of current window and undo-tree-visualizer window")
 
 
 ;;; =====================================================================
@@ -3204,7 +3206,8 @@ signaling an error if file is not found."
   (let ((undo-tree buffer-undo-tree)
         (buff (current-buffer))
 	(display-buffer-mark-dedicated 'soft))
-    (switch-to-buffer-other-window
+    (split-window (selected-window) (round (* (window-width) undo-tree-visualizer-ratio)) 'left)
+    (switch-to-buffer
      (get-buffer-create undo-tree-visualizer-buffer-name))
     (setq undo-tree-visualizer-parent-buffer buff)
     (setq undo-tree-visualizer-parent-mtime
@@ -3948,16 +3951,7 @@ using `undo-tree-redo' or `undo-tree-visualizer-redo'."
 	(remove-hook 'before-change-functions 'undo-tree-kill-visualizer t))
     ;; kill diff buffer, if any
     (when undo-tree-visualizer-diff (undo-tree-visualizer-hide-diff))
-    (let ((parent undo-tree-visualizer-parent-buffer)
-	  window)
-      ;; kill visualizer buffer
-      (kill-buffer nil)
-      ;; switch back to parent buffer
-      (unwind-protect
-	  (if (setq window (get-buffer-window parent))
-	      (select-window window)
-	    (switch-to-buffer parent))))))
-
+    (delete-window)))
 
 (defun undo-tree-visualizer-abort ()
   "Quit the undo-tree visualizer and return buffer to original state."

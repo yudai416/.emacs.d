@@ -149,6 +149,9 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
 (require 'w3m-load)
 
+; 選択中のリージョンの色の設定
+(set-face-background 'region "LightSteelBlue1")
+
 ;; =====================================================
 ;;
 ;; root権限でファイルを開く設定
