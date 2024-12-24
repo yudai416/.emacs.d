@@ -3519,7 +3519,7 @@ Acceptable values of CREATE-OR-BUFFER:
          (local-bname (format " *anything candidates:%s*%s"
                               anything-source-name
                               (buffer-name anything-current-buffer))))
-    (flet ((register-func ()
+    (cl-flet ((register-func ()
              (setq anything-candidate-buffer-alist
                    (cons (cons anything-source-name create-or-buffer)
                          (delete (assoc anything-source-name

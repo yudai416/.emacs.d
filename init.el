@@ -1,3 +1,6 @@
+; Package cl is deprecatedの抑制
+(setq byte-compile-warnings '(cl-functions))
+
 ; elispのパスを通す
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 ;(setq load-path (cons "~/.emacs.d/dict" load-path))
