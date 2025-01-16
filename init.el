@@ -2,8 +2,7 @@
 (setq byte-compile-warnings '(cl-functions))
 
 ; elispのパスを通す
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
-;(setq load-path (cons "~/.emacs.d/dict" load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp")
 
 ; オートインストールの設定
 ;(when (require 'auto-install nil t)
@@ -11,32 +10,27 @@
 ;  (auto-install-update-emacswiki-package-name t)
 ;  (auto-install-compatibility-setup))
 
-;; ; ターミナルエミュレータのシェルをbashに設定
-;; (when (require 'multi-term nil t)
-;;   (setq multi-term-directory "~/.emacs.d/elisp/")
-;;   (setq multi-term-program "/bin/bash"))
-
 ; undo-treeの設定
-;(when (require 'undo-tree nil t)
-;  (setq undo-tree-directory "~/.emacs.d/elisp/"))
 (when (require 'undo-tree nil t)
- (global-undo-tree-mode))
+  (global-undo-tree-mode))
 
 ;;; package.el
 (require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t) ;; meplaを追加
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t) ;;
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t) ;; elpaを追加
+;; MELPA
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; MELPA-stable
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t) ;;
+;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t) ;; elpaを追加
 (package-initialize)
 
-;; auto-complete
-(require 'auto-complete)
-(global-auto-complete-mode t)
+;; company
+(when (require 'company nil t)
+  (global-company-mode))
 
 ;; popwin
-(require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
+;; (when (require 'popwin nil t)
+;;   (setq display-buffer-alist 'popwin:display-buffer))
 
 ; 括弧強調
 (show-paren-mode t)
@@ -73,35 +67,8 @@
 ;; ; 文字サイズ指定
 ;; (set-face-font 'default "-*-*-*-*-*-*-14-*")
 
-; 初期フレームの設定
-;(setq initial-frame-alist 
-;      (append
-;       '((width  . 143) ; フレーム幅(文字数)
-;	 (height . 37)  ; フレーム高さ(文字数)
-	 ;(top    . 0)   ; 表示位置
-;	 (left   . 0)   ; 表示位置
-;	 )
-;       initial-frame-alist))
-
 ; スクリーンの最大化
 (set-frame-parameter nil 'fullscreen 'maximized)
-
-; フルスクリーン
-;(set-frame-parameter nil 'fullscreen 'fullboth)
-
-;; ; 起動時にバッファを2分割、左側にbashを表示
-;; (defun split-window-and-run-term()
-;;   (setq w (selected-window))
-;;   (setq w2 (split-window w nil t))
-;;   (select-window w)
-;;   ; (multi-term)
-;;   (eshell)
-;;   (select-window w))
-;; (add-hook 'after-init-hook (lambda()(split-window-and-run-term)))
-
-; 自動略語補完
-(require 'auto-complete-config)
-(ac-config-default)
 
 ; C-c C-c でregionをコメントアウト
 (global-set-key (kbd "C-c C-c") 'comment-region)
@@ -116,12 +83,12 @@
 (global-set-key (kbd "C-x /") 'goto-line)
 
 ; C-x : でkill-summary
-(require 'kill-summary)
-(global-set-key (kbd "C-x :") 'kill-summary)
+(when (require 'kill-summary nil t)
+  (global-set-key (kbd "C-x :") 'kill-summary))
 
 ; C-x c でkininarimasu
-(require 'chitanda)
-(global-set-key (kbd "C-x c") 'kininarimasu)
+(when (require 'chitanda nil t)
+  (global-set-key (kbd "C-x c") 'kininarimasu))
 
 ; C-c 0 でerutaso1
 (global-set-key (kbd "C-c 0") 'erutaso0)
@@ -133,10 +100,10 @@
 (global-set-key (kbd "C-c 2") 'erutaso2)
 
 ; C-x ; でanything
-(require 'anything)
-(require 'anything-config)
-(require 'anything-match-plugin)
-(global-set-key (kbd "C-x ;") 'anything)
+(when (require 'anything nil t)
+  (when (require 'anything-config nil t)
+    (when (require 'anything-match-plugin nil t)
+      (global-set-key (kbd "C-x ;") 'anything))))
 
 ; C-x \ でreplace-regexp
 (global-set-key (kbd "C-x \\") 'replace-regexp)
@@ -145,12 +112,12 @@
 (global-set-key (kbd "C-x C-\\") 'replace-string)
 
 ; C-x p でfix-this-buffer
-(require 'fix-buffer)
-(global-set-key (kbd "C-x p") 'fix-this-buffer)
+(when (require 'fix-buffer nil t)
+  (global-set-key (kbd "C-x p") 'fix-this-buffer))
 
 ; w3mのインクルード
 (add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
-(require 'w3m-load)
+(when (require 'w3m-load nil t))
 
 ; 選択中のリージョンの色の設定
 (set-face-background 'region "LightSteelBlue1")
@@ -200,14 +167,14 @@
 ; C言語のflymakeの設定
 (require 'flymake)
 (defun flymake-c-init ()
-  (let* ((temp-file  (flymake-init-create-temp-buffer-copy
+  (let* ((temp-file  (flymake-proc-init-create-temp-buffer-copy
                      'flymake-create-temp-inplace))
          (local-file (file-relative-name
                       temp-file
                       (file-name-directory buffer-file-name))))
     (list "gcc" (list "-Wall" "-W" "-pedantic" "-fsyntax-only" 
 		      local-file))))
-(push '("\\.c$" flymake-c-init) flymake-allowed-file-name-masks)
+(push '("\\.c$" flymake-c-init) flymake-proc-allowed-file-name-masks)
 (add-hook 'c-mode-hook 
 	  '(lambda () (if (string-match "\\.c$" buffer-file-name)
 			  (flymake-mode t))))
@@ -222,19 +189,7 @@
 ;; d-mode
 (add-to-list 'load-path "~/.emacs.d/d-mode")
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
-(setq auto-mode-alist (cons
-               '("\\.d$" . d-mode) auto-mode-alist))
-
-;; ac-dcd
-(require 'ac-dcd)
-(add-hook 'd-mode-hook
-          '(lambda ()
-             (c-set-style "bsd")
-             (setq c-basic-offset 2)
-             (setq c-auto-newline t)
-             (setq indent-tabs-mode nil)
-             (setq tab-width 2)
-             (ac-dcd-setup)))
+(setq auto-mode-alist (cons '("\\.d$" . d-mode) auto-mode-alist))
 
 ; processing
 ; .pdeを.javaと関連付け
@@ -242,13 +197,13 @@
 			    auto-mode-alist))
 (setq interpreter-mode-alist(append '(("java" . java-mode)) 
 				    interpreter-mode-alist))
-(setq java-deep-indent-paren-style nil)
+(defvar java-deep-indent-paren-style nil)
 
 ; Python
 (add-hook 'find-file-hook 'flymake-find-file-hook)
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+    (let* ((temp-file (flymake-proc-init-create-temp-buffer-copy
 		       'flymake-create-temp-inplace))
 	   (local-file (file-relative-name
 			temp-file
@@ -269,7 +224,6 @@
   ;; If there is more than one, they won't work right.
  )
 
-;; haskell
 ;;; haskell-mode
 (autoload 'haskell-mode "haskell-mode" nil t)
 (autoload 'haskell-cabal "haskell-cabal" nil t)
@@ -278,40 +232,43 @@
 (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
 (add-to-list 'auto-mode-alist '("\\.cabal$" . haskell-cabal-mode))
 
-;;; ghc-mod
+;; ghc-mod
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
 
-;; ;;php-mode
-;; (load-library "php-mode")
-;; (require 'php-mode)
-
 ;;web-mode
-(require 'web-mode)
-;;; 適用する拡張子
-(add-to-list 'auto-mode-alist '("\\.phtml$"     . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php$"       . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp$"       . web-mode))
-(add-to-list 'auto-mode-alist '("\\.json$"      . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x$"   . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
+(when (require 'web-mode nil t)
+  ;;; 適用する拡張子
+  (add-to-list 'auto-mode-alist '("\\.phtml$"     . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php$"       . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsp$"       . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.json$"      . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x$"   . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode)))
+
 ;;; インデント数
 (defun web-mode-hook ()
   "Hooks for Web mode."
-  (setq web-mode-html-offset   2)
-  (setq web-mode-css-offset    2)
-  (setq web-mode-script-offset 2)
-  (setq web-mode-php-offset    2)
-  (setq web-mode-java-offset   2)
-  (setq web-mode-asp-offset    2))
+  (defvar web-mode-html-offset   2)
+  (defvar web-mode-css-offset    2)
+  (defvar web-mode-script-offset 2)
+  (defvar web-mode-php-offset    2)
+  (defvar web-mode-java-offset   2)
+  (defvar web-mode-asp-offset    2))
 (add-hook 'web-mode-hook 'web-mode-hook)
 ;;; 色の設定
 (set-face-attribute 'web-mode-html-tag-face nil :foreground "#0000FF")
 (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "#CC9922")
 
-;;; yaml-modeの設定
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+;; yaml-modeの設定
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+
+;; rust-modeの設定
+(when (require 'rust-mode nil t)
+  (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil)))
+  (defvar rust-format-on-save t)
+  (add-hook 'rust-mode-hook (lambda () (prettify-symbols-mode))))
