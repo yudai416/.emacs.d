@@ -197,7 +197,7 @@
 			    auto-mode-alist))
 (setq interpreter-mode-alist(append '(("java" . java-mode)) 
 				    interpreter-mode-alist))
-(defvar java-deep-indent-paren-style nil)
+(setq-default java-deep-indent-paren-style nil)
 
 ; Python
 (add-hook 'find-file-hook 'flymake-find-file-hook)
@@ -242,7 +242,6 @@
   (add-to-list 'auto-mode-alist '("\\.phtml$"     . web-mode))
   (add-to-list 'auto-mode-alist '("\\.php$"       . web-mode))
   (add-to-list 'auto-mode-alist '("\\.jsp$"       . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json$"      . web-mode))
   (add-to-list 'auto-mode-alist '("\\.as[cp]x$"   . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb$"       . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode)))
@@ -250,16 +249,18 @@
 ;;; インデント数
 (defun web-mode-hook ()
   "Hooks for Web mode."
-  (defvar web-mode-html-offset   2)
-  (defvar web-mode-css-offset    2)
-  (defvar web-mode-script-offset 2)
-  (defvar web-mode-php-offset    2)
-  (defvar web-mode-java-offset   2)
-  (defvar web-mode-asp-offset    2))
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq-default web-mode-css-indent-offset 2)
+  (setq-default web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook 'web-mode-hook)
+(setq-default js-indent-level 2)
+
 ;;; 色の設定
 (set-face-attribute 'web-mode-html-tag-face nil :foreground "#0000FF")
 (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "#CC9922")
+
+;; .json5をjavascript-modeに対応付け
+(add-to-list 'auto-mode-alist '("\\.json5\\'" . javascript-mode))
 
 ;; yaml-modeの設定
 (when (require 'yaml-mode nil t)
@@ -270,5 +271,5 @@
 ;; rust-modeの設定
 (when (require 'rust-mode nil t)
   (add-hook 'rust-mode-hook (lambda () (setq indent-tabs-mode nil)))
-  (defvar rust-format-on-save t)
+  (setq-default rust-format-on-save t)
   (add-hook 'rust-mode-hook (lambda () (prettify-symbols-mode))))
