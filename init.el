@@ -42,7 +42,8 @@
 (column-number-mode t)
 
 ; 行番号表示
-(global-linum-mode t)
+(global-display-line-numbers-mode)
+;; (global-linum-mode t)
 ; (setq linum-format "%4d")
 
 ; 常時デバッグ
